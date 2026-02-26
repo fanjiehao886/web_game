@@ -1,0 +1,12 @@
+{
+  "ver": "1.0.24",
+  "uuid": "bd2f792f-a40c-49bb-a189-ed176a246e49",
+  "importer": "directory",
+  "isBundle": false,
+  "bundleName": "",
+  "priority": 1,
+  "compressionType": {},
+  "optimizeHotUpdate": {},
+  "sharedAssets": null,
+  "subMetas": {}
+}

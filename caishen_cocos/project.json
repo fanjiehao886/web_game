@@ -1,0 +1,28 @@
+{
+  "engine": "cocos-creator-js",
+  "packages": "packages",
+  "name": "caishen_cocos",
+  "id": "ee82fd63-f957-4957-a5a4-dc72f85a8fd7",
+  "version": "2.4.13",
+  "isNew": false,
+  "uuids": [
+    "2d2f792f-a40c-49bb-a189-ed176a246e49",
+    "3d2f792f-a40c-49bb-a189-ed176a246e49",
+    "4d2f792f-a40c-49bb-a189-ed176a246e49",
+    "5d2f792f-a40c-49bb-a189-ed176a246e49",
+    "6d2f792f-a40c-49bb-a189-ed176a246e49",
+    "7d2f792f-a40c-49bb-a189-ed176a246e49",
+    "8d2f792f-a40c-49bb-a189-ed176a246e49",
+    "9d2f792f-a40c-49bb-a189-ed176a246e49",
+    "ad2f792f-a40c-49bb-a189-ed176a246e49",
+    "bd2f792f-a40c-49bb-a189-ed176a246e49",
+    "cd2f792f-a40c-49bb-a189-ed176a246e49"
+  ],
+  "settings": {
+    "frameRate": 60,
+    "designResolution": {
+      "width": 720,
+      "height": 1280
+    }
+  }
+}
