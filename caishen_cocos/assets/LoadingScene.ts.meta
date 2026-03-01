@@ -1,12 +1,10 @@
 {
-  "ver": "1.1.3",
+  "ver": "1.1.0",
   "uuid": "ad2f792f-a40c-49bb-a189-ed176a246e49",
-  "isBundle": false,
-  "bundleName": "",
-  "priority": 1,
-  "compressionType": {},
-  "optimizeHotUpdate": {},
-  "sharedAssets": null,
-  "extraTypes": [],
-  "redirect": ""
+  "importer": "typescript",
+  "isPlugin": false,
+  "loadPluginInWeb": true,
+  "loadPluginInNative": true,
+  "loadPluginInEditor": false,
+  "subMetas": {}
 }

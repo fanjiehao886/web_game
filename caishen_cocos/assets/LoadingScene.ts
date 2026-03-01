@@ -80,14 +80,14 @@ export default class LoadingScene extends cc.Component {
 
         resources.forEach((res) => {
             if (res.type === 'image') {
-                cc.resources.load(res.url, cc.SpriteFrame, (err) => {
+                cc.loader.loadRes(res.url, cc.SpriteFrame, (err) => {
                     if (err) {
                         console.error('加载失败:', res.url, err);
                     }
                     this.updateProgress(++loadedCount, total);
                 });
             } else if (res.type === 'audio') {
-                cc.resources.load(res.url, cc.AudioClip, (err) => {
+                cc.loader.loadRes(res.url, cc.AudioClip, (err) => {
                     if (err) {
                         console.error('加载失败:', res.url, err);
                     }

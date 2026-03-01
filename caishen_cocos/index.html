@@ -25,6 +25,115 @@
       max-width: 100%;
       max-height: 100%;
     }
+
+    /* 二维码弹窗 */
+    #qrcode-overlay {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+    #qrcode-overlay .popup-content {
+      position: relative;
+      width: 70vw;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #qrcode-overlay .close-btn {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 18px;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    #qrcode-overlay .text {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 12px;
+      text-align: center;
+      white-space: pre-line;
+    }
+    #qrcode-overlay .img-container {
+      position: relative;
+      display: inline-block;
+    }
+    #qrcode-overlay img {
+      width: 60vw;
+      max-width: 300px;
+    }
+
+    /* 分享弹窗 */
+    #share-overlay {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+    #share-overlay .popup-content {
+      position: relative;
+      width: 70vw;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #share-overlay .close-btn {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 18px;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    #share-overlay .text {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 12px;
+      text-align: center;
+      white-space: pre-line;
+    }
+    #share-overlay .img-container {
+      position: relative;
+      display: inline-block;
+    }
+    #share-overlay img {
+      width: 60vw;
+      max-width: 300px;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
@@ -32,23 +141,62 @@
     <canvas id="game-canvas"></canvas>
   </div>
 
-  <!-- 加载 Cocos Creator 构建后的游戏脚本 -->
+  <!-- 二维码弹窗 -->
+  <div id="qrcode-overlay">
+    <div class="popup-content">
+      <button class="close-btn" id="qrcode-close-btn">×</button>
+      <div class="text">长按识别二维码关注"狼山信息"，关注后即可获得1根香！</div>
+      <div class="img-container">
+        <img id="qrcode-img" src="" alt="二维码" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 分享弹窗 -->
+  <div id="share-overlay">
+    <div class="popup-content">
+      <button class="close-btn" id="share-close-btn">×</button>
+      <div class="text">分享给朋友，获得更多香火！</div>
+      <div class="img-container">
+        <img id="share-img" src="" alt="分享图片" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Cocos Creator 构建后的脚本会在这里加载 -->
   <script src="build/cocos-jsb.js"></script>
   <script src="build/settings.js"></script>
   <script>
-    window.onload = function() {
-      // 启动游戏
-      if (typeof cc !== 'undefined') {
-        cc.game.onStart = function() {
-          cc.view.setDesignResolutionSize(720, 1280, cc.ResolutionPolicy.SHOW_ALL);
-          cc.view.resizeWithBrowserSize(true);
-          cc.director.loadScene('LoadingScene');
-        };
-        cc.game.run();
-      } else {
-        console.error('Cocos Creator 引擎未加载，请确保构建正确');
+    // 关闭按钮事件
+    document.getElementById('qrcode-close-btn').addEventListener('click', function() {
+      const overlay = document.getElementById('qrcode-overlay');
+      if (overlay) {
+        overlay.style.display = 'none';
       }
-    };
+      // 通知游戏关闭弹窗
+      if (window.cc && window.cc.director && window.cc.director.getScene()) {
+        const scene = window.cc.director.getScene();
+        const mainSceneNode = scene.getChildByName('Canvas').getChildByName('MainScene');
+        if (mainSceneNode && mainSceneNode.getComponent('MainScene')) {
+          mainSceneNode.getComponent('MainScene').closeQrcodePopup();
+        }
+      }
+    });
+
+    document.getElementById('share-close-btn').addEventListener('click', function() {
+      const overlay = document.getElementById('share-overlay');
+      if (overlay) {
+        overlay.style.display = 'none';
+      }
+      // 通知游戏关闭弹窗
+      if (window.cc && window.cc.director && window.cc.director.getScene()) {
+        const scene = window.cc.director.getScene();
+        const mainSceneNode = scene.getChildByName('Canvas').getChildByName('MainScene');
+        if (mainSceneNode && mainSceneNode.getComponent('MainScene')) {
+          mainSceneNode.getComponent('MainScene').closeSharePopup();
+        }
+      }
+    });
   </script>
 </body>
 </html>
