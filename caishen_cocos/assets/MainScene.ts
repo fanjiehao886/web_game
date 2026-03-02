@@ -284,8 +284,8 @@ export default class MainScene extends cc.Component {
                     }
                 });
                 qrcodeImgNode.parent = popupBgNode;
-                qrcodeImgNode.setPosition(0, 20);
-                qrcodeImgNode.scale = 0.5;
+                qrcodeImgNode.setPosition(0, 30);
+                qrcodeImgNode.scale = 2.5; // 放大二维码
                 qrcodeImgNode.zIndex = 2;
 
                 // 提示文字
@@ -308,8 +308,8 @@ export default class MainScene extends cc.Component {
                         const closeSprite = closeBtnNode.addComponent(cc.Sprite);
                         closeSprite.spriteFrame = closeSpriteFrame;
                         closeBtnNode.parent = popupBgNode;
-                        closeBtnNode.setPosition(140, 140);
-                        closeBtnNode.scale = 0.6;
+                        closeBtnNode.setPosition(320, 480); // 右上角位置
+                        closeBtnNode.scale = 0.1; // 缩小到 0.3
                         closeBtnNode.zIndex = 4;
 
                         const closeBtn = closeBtnNode.addComponent(cc.Button);
