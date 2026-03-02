@@ -133,7 +133,7 @@ export default class MainScene extends cc.Component {
                 const altarSprite = altarNode.addComponent(cc.Sprite);
                 altarSprite.spriteFrame = spriteFrame;
                 altarNode.parent = canvas;
-                altarNode.setPosition(0, 332); // 1280 * 0.76 - 640 = 332.8
+                altarNode.setPosition(0, -250); // 1280 * 0.76 - 640 = 332.8
                 altarNode.scale = 0.4;
                 altarNode.zIndex = 1;
             }
@@ -146,7 +146,7 @@ export default class MainScene extends cc.Component {
                 const burnerSprite = burnerNode.addComponent(cc.Sprite);
                 burnerSprite.spriteFrame = spriteFrame;
                 burnerNode.parent = canvas;
-                burnerNode.setPosition(0, 256); // 1280 * 0.7 - 640 = 256
+                burnerNode.setPosition(0, -150); // 1280 * 0.7 - 640 = 256
                 burnerNode.scale = 0.5;
                 burnerNode.zIndex = 2;
             }
@@ -159,7 +159,7 @@ export default class MainScene extends cc.Component {
                 const incenseSprite = incenseNode.addComponent(cc.Sprite);
                 incenseSprite.spriteFrame = spriteFrame;
                 incenseNode.parent = canvas;
-                incenseNode.setPosition(0, 218); // 1280 * 0.67 - 640 = 217.6
+                incenseNode.setPosition(0, -35); // 1280 * 0.67 - 640 = 217.6
                 incenseNode.zIndex = 3;
                 this.incenseSprite = incenseSprite;
             }
@@ -194,8 +194,9 @@ export default class MainScene extends cc.Component {
                 const burnSprite = burnBtnNode.addComponent(cc.Sprite);
                 burnSprite.spriteFrame = spriteFrame;
                 burnBtnNode.parent = canvas;
-                burnBtnNode.setPosition(0, -128); // 移到屏幕底部：1280 * 0.9 - 1280 = -128
+                burnBtnNode.setPosition(0, -500); // 移到屏幕底部：1280 * 0.9 - 1280 = -128
                 burnBtnNode.zIndex = 20;
+                burnBtnNode.scale = 0.5;
 
                 // 设置一个较大的点击区域
                 burnBtnNode.setContentSize(600, 200);
