@@ -5,8 +5,8 @@ export default class LoadingScene extends cc.Component {
     @property(cc.Label)
     loadingLabel: cc.Label = null;
 
-    @property(cc.Node)
-    progressBar: cc.Node = null;
+    @property(cc.Sprite)
+    barSprite: cc.Sprite = null;
 
     private progress: number = 0;
     private tips: string[] = [
@@ -59,20 +59,20 @@ export default class LoadingScene extends cc.Component {
 
     loadResources() {
         const resources = [
-            { type: 'image', url: 'images/caishen/bg_caishen.png' },
-            { type: 'image', url: 'images/caishen/altar.png' },
-            { type: 'image', url: 'images/caishen/incense_burner.png' },
-            { type: 'image', url: 'images/caishen/incense_unlit.png' },
-            { type: 'image', url: 'images/caishen/incense_lit.png' },
-            { type: 'image', url: 'images/caishen/btn_burn.png' },
-            { type: 'image', url: 'images/caishen/popup_bg.png' },
-            { type: 'image', url: 'images/caishen/qrcode.png' },
-            { type: 'image', url: 'images/caishen/btn_close.png' },
-            { type: 'image', url: 'images/caishen/coin.png' },
-            { type: 'image', url: 'images/caishen/share_timeline.png' },
-            { type: 'audio', url: 'audio/caishen/burn_sound.wav' },
-            { type: 'audio', url: 'audio/caishen/bgm_temple.mp3' },
-            { type: 'audio', url: 'audio/caishen/drop.mp3' }
+            { type: 'image', url: 'images/caishen/bg_caishen' },
+            { type: 'image', url: 'images/caishen/altar' },
+            { type: 'image', url: 'images/caishen/incense_burner' },
+            { type: 'image', url: 'images/caishen/incense_unlit' },
+            { type: 'image', url: 'images/caishen/incense_lit' },
+            { type: 'image', url: 'images/caishen/btn_burn' },
+            { type: 'image', url: 'images/caishen/popup_bg' },
+            { type: 'image', url: 'images/caishen/qrcode' },
+            { type: 'image', url: 'images/caishen/btn_close' },
+            { type: 'image', url: 'images/caishen/coin' },
+            { type: 'image', url: 'images/caishen/share_timeline' },
+            { type: 'audio', url: 'audio/caishen/burn_sound' },
+            { type: 'audio', url: 'audio/caishen/bgm_temple' },
+            { type: 'audio', url: 'audio/caishen/drop' }
         ];
 
         let loadedCount = 0;
@@ -80,16 +80,20 @@ export default class LoadingScene extends cc.Component {
 
         resources.forEach((res) => {
             if (res.type === 'image') {
-                cc.loader.loadRes(res.url, cc.SpriteFrame, (err) => {
+                cc.loader.loadRes(res.url, cc.SpriteFrame, (err, spriteFrame) => {
                     if (err) {
                         console.error('加载失败:', res.url, err);
+                    } else {
+                        console.log('加载成功:', res.url);
                     }
                     this.updateProgress(++loadedCount, total);
                 });
             } else if (res.type === 'audio') {
-                cc.loader.loadRes(res.url, cc.AudioClip, (err) => {
+                cc.loader.loadRes(res.url, cc.AudioClip, (err, clip) => {
                     if (err) {
                         console.error('加载失败:', res.url, err);
+                    } else {
+                        console.log('加载成功:', res.url);
                     }
                     this.updateProgress(++loadedCount, total);
                 });
@@ -99,15 +103,17 @@ export default class LoadingScene extends cc.Component {
 
     updateProgress(current: number, total: number) {
         this.progress = current / total;
-        if (this.progressBar) {
-            this.progressBar.width = 300 * this.progress;
+        if (this.barSprite && this.barSprite.node) {
+            this.barSprite.node.width = 300 * this.progress;
         }
         if (this.loadingLabel) {
             this.loadingLabel.string = `加载中... ${Math.round(this.progress * 100)}%`;
         }
 
         if (current >= total) {
+            console.log('所有资源加载完成，准备切换到 MainScene');
             this.scheduleOnce(() => {
+                console.log('切换到 MainScene');
                 cc.director.loadScene('MainScene');
             }, 0.5);
         }
